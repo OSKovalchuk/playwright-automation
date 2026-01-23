@@ -4,8 +4,6 @@ import { ENV } from './config/environment.js';
 
 export default defineConfig({
   testDir: './tests',
-  fullyParallel: true,
-  reporter: 'html',
   use: {
    
     baseURL: ENV.BASE_URL,
