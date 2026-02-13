@@ -13,11 +13,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Install dependencies
         run: npm ci --prefer-offline --no-audit
+
       - name: Verify Cypress in Docker
-        # Замість запуску тестів просто перевіряємо, що Cypress працює
-        run: npx cypress --version
+        # Використовуємо verify замість run, щоб перевірити готовність середовища
+        run: npx cypress verify
 
   playwright-run:
     runs-on: ubuntu-latest
@@ -26,8 +28,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Install dependencies
         run: npm ci --prefer-offline --no-audit
+
       - name: Verify Playwright in Docker
-        # Перевіряємо версію Playwright всередині контейнера
+        # Просто перевіряємо версію, щоб підтвердити успішний запуск у контейнері
         run: npx playwright --version
