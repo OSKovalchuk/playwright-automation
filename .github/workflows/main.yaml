@@ -18,7 +18,7 @@ jobs:
         run: npm ci --prefer-offline --no-audit
 
       - name: Verify Cypress in Docker
-        # Використовуємо verify замість run, щоб перевірити готовність середовища
+       
         run: npx cypress verify
 
   playwright-run:
@@ -33,5 +33,5 @@ jobs:
         run: npm ci --prefer-offline --no-audit
 
       - name: Verify Playwright in Docker
-        # Просто перевіряємо версію, щоб підтвердити успішний запуск у контейнері
+        # Просто виведемо версію, щоб підтвердити, що Playwright працює в Докері
         run: npx playwright --version
