@@ -1,17 +1,33 @@
-name: Playwright Tests
+name: CI Tests (Cypress & Playwright)
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, lesson-31 ]
   pull_request:
     branches: [ main, master ]
 
 jobs:
-  test:
+  # Завдання 1: Cypress
+  cypress-run:
     runs-on: ubuntu-latest
-    # Саме тут ми вказуємо Docker-контейнер
     container:
-      image: mcr.microsoft.com/playwright:v1.39.0-jammy
+      # Використовуємо імейдж із завдання
+      image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress tests
+        run: npx cypress run
+
+  # Завдання 2: Playwright
+  playwright-run:
+    runs-on: ubuntu-latest
+    container:
+      # Використовуємо імейдж із завдання
+      image: mcr.microsoft.com/playwright:v1.39.0-jammy
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
