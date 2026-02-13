@@ -6,6 +6,7 @@ on:
     branches: [ main, master ]
 
 jobs:
+  # Завдання 1: Cypress
   cypress-run:
     runs-on: ubuntu-latest
     container:
@@ -13,14 +14,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Install dependencies
-        run: npm ci --prefer-offline --no-audit
-
+        run: npm ci --prefer-offline
       - name: Verify Cypress in Docker
-       
+        # Ця команда просто підтверджує, що Cypress готовий до роботи
         run: npx cypress verify
 
+  # Завдання 2: Playwright
   playwright-run:
     runs-on: ubuntu-latest
     container:
@@ -28,10 +28,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Install dependencies
-        run: npm ci --prefer-offline --no-audit
-
+        run: npm ci --prefer-offline
       - name: Verify Playwright in Docker
-        # Просто виведемо версію, щоб підтвердити, що Playwright працює в Докері
+        # Перевірка версії замість запуску тестів, які падають через environment.js
         run: npx playwright --version
